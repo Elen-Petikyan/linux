@@ -1,0 +1,31 @@
+#include <iostream>
+#include<pthread.h>
+#include<stdio.h>
+#include <stdlib.h>     
+#include <time.h>
+
+int count;
+int atoi(const char *nptr);
+void *rand();
+
+
+int main(int argc, char *argv[]) 
+{
+  pthread_t tid;
+  pthread_attr_t attr;
+  if(argc != 2)
+    return -1;
+  pthread_attr_init(&attr);
+  pthread_create(&tid, &attr, rand, argv[1]);
+  pthread_join(tid, NULL);
+
+}
+
+void *rand()
+{
+  int random;
+  srand (time(NULL));
+  random = rand() % 100 + 1;
+  std::cout << random;
+
+}
